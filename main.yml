@@ -5,30 +5,30 @@
   environment:
     LD_PRELOAD: libtcmalloc.so
   tasks:
-    - name: Descargar y descomprimir memfix.zip
+    - name: Download memfix.zip
       get_url:
         url: https://github.com/nolanaatama/sd-webui/raw/main/memfix.zip
         dest: /tmp/memfix.zip
 
-    - name: Descomprimir archivo
+    - name: Unzip memfix.zip
       unarchive:
         src: /tmp/memfix.zip
         dest: /tmp/
 
-    - name: Instalar libunwind8-dev
+    - name: Install libunwind8-dev
       apt:
         name: libunwind8-dev
         state: present
 
-    - name: Instalar deb package
+    - name: Install deb package
       shell: dpkg -i /tmp/*.deb
 
-    - name: Instalar fastapi
+    - name: Install fastapi
       pip:
         name: fastapi==0.90.1
         state: latest
 
-    - name: Instalar torch y otras dependencias
+    - name: Install torch and other dependencies
       pip:
         name:
           - torch==1.13.1+cu116
@@ -39,41 +39,41 @@
         extra_args: --extra-index-url https://download.pytorch.org/whl/cu116
         state: latest
 
-    - name: Descargar sd-webui.zip
+    - name: Download sd-webui.zip
       get_url:
         url: https://huggingface.co/nolanaatama/webui/resolve/main/sd-webui.zip
         dest: /content/sd-webui.zip
 
-    - name: Descomprimir sd-webui.zip
+    - name: Unzip sd-webui.zip
       unarchive:
         src: /content/sd-webui.zip
         dest: /content
         remote_src: yes
 
-    - name: Clonar sd-webui-tunnels
+    - name: Clone sd-webui-tunnels
       git:
         repo: https://github.com/nolanaatama/sd-webui-tunnels
         dest: /content/sd-webui/extensions/sd-webui-tunnels
         clone: yes
 
-    - name: Clonar sd-webui-controlnet
+    - name: Clone sd-webui-controlnet
       git:
         repo: https://github.com/Mikubill/sd-webui-controlnet
         dest: /content/sd-webui/extensions/sd-webui-controlnet
         clone: yes
 
-    - name: Clonar posex
+    - name: Clone posex
       git:
         repo: https://github.com/hnmr293/posex
         dest: /content/sd-webui/extensions/posex
         clone: yes
 
-    - name: Descargar sd-webui-images-browser.zip
+    - name: Download sd-webui-images-browser.zip
       get_url:
         url: https://huggingface.co/nolanaatama/webui/resolve/main/sd-webui-images-browser.zip
         dest: /content/sd-webui/extensions/sd-webui-images-browser.zip
 
-    - name: Descomprimir sd-webui-images-browser.zip
+    - name: Unzip sd-webui-images-browser.zip
       unarchive:
         src: /content/sd-webui/extensions/sd-webui-images-browser.zip
         dest: /content/sd-webui/extensions
@@ -114,7 +114,7 @@
         repo: https://huggingface.co/nolanaatama/models
         dest: /content/sd-webui/extensions/sd-webui-controlnet
 
-    - name: Descargar modelo deliberate.safetensors
+    - name: Download deliberate.safetensors model
       get_url:
         url: "https://civitai.com/api/download/models/15236"
         dest: "/content/sd-webui/models/Stable-diffusion/deliberate.safetensors"
