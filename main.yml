@@ -107,12 +107,12 @@
     - name: Clone ESRGAN model repository
       git:
         repo: https://huggingface.co/nolanaatama/ESRGAN
-        dest: /content/sd-webui/models
+        dest: /content/sd-webui/models/ESRGAN
       
     - name: Clone controlnet model repository
       git:
         repo: https://huggingface.co/nolanaatama/models
-        dest: /content/sd-webui/extensions/sd-webui-controlnet
+        dest: /content/sd-webui/extensions/sd-webui-controlnet/models
 
     - name: Download deliberate.safetensors model
       get_url:
