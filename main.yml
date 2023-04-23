@@ -1,0 +1,120 @@
+- name: Stable Diffussion - WebUI
+  hosts: localhost
+  become: no
+  gather_facts: no
+  environment:
+    LD_PRELOAD: libtcmalloc.so
+  tasks:
+    - name: Descargar y descomprimir memfix.zip
+      get_url:
+        url: https://github.com/nolanaatama/sd-webui/raw/main/memfix.zip
+        dest: /tmp/memfix.zip
+
+    - name: Descomprimir archivo
+      unarchive:
+        src: /tmp/memfix.zip
+        dest: /tmp/
+
+    - name: Instalar libunwind8-dev
+      apt:
+        name: libunwind8-dev
+        state: present
+
+    - name: Instalar deb package
+      shell: dpkg -i /tmp/*.deb
+
+    - name: Instalar fastapi
+      pip:
+        name: fastapi==0.90.1
+        state: latest
+
+    - name: Instalar torch y otras dependencias
+      pip:
+        name:
+          - torch==1.13.1+cu116
+          - torchvision==0.14.1+cu116
+          - torchaudio==0.13.1
+          - torchtext==0.14.1
+          - torchdata==0.5.1
+        extra_args: --extra-index-url https://download.pytorch.org/whl/cu116
+        state: latest
+
+    - name: Descargar sd-webui.zip
+      get_url:
+        url: https://huggingface.co/nolanaatama/webui/resolve/main/sd-webui.zip
+        dest: /content/sd-webui.zip
+
+    - name: Descomprimir sd-webui.zip
+      unarchive:
+        src: /content/sd-webui.zip
+        dest: /content
+        remote_src: yes
+
+    - name: Clonar sd-webui-tunnels
+      git:
+        repo: https://github.com/nolanaatama/sd-webui-tunnels
+        dest: /content/sd-webui/extensions/sd-webui-tunnels
+        clone: yes
+
+    - name: Clonar sd-webui-controlnet
+      git:
+        repo: https://github.com/Mikubill/sd-webui-controlnet
+        dest: /content/sd-webui/extensions/sd-webui-controlnet
+        clone: yes
+
+    - name: Clonar posex
+      git:
+        repo: https://github.com/hnmr293/posex
+        dest: /content/sd-webui/extensions/posex
+        clone: yes
+
+    - name: Descargar sd-webui-images-browser.zip
+      get_url:
+        url: https://huggingface.co/nolanaatama/webui/resolve/main/sd-webui-images-browser.zip
+        dest: /content/sd-webui/extensions/sd-webui-images-browser.zip
+
+    - name: Descomprimir sd-webui-images-browser.zip
+      unarchive:
+        src: /content/sd-webui/extensions/sd-webui-images-browser.zip
+        dest: /content/sd-webui/extensions
+        remote_src: yes
+
+    - name: Remove existing embeddings folder
+      file:
+        path: /content/sd-webui/embeddings
+        state: absent
+      
+    - name: Remove existing controlnet models folder
+      file:
+        path: /content/sd-webui/extensions/sd-webui-controlnet/models
+        state: absent
+      
+    - name: Remove existing sd-webui.zip file
+      file:
+        path: /content/sd-webui/sd-webui.zip
+        state: absent
+      
+    - name: Remove existing sd-webui-images-browser.zip file
+      file:
+        path: /content/sd-webui/extensions/sd-webui-images-browser.zip
+        state: absent
+      
+    - name: Clone embeddings repository
+      git:
+        repo: https://huggingface.co/nolanaatama/embeddings
+        dest: /content/sd-webui/embeddings
+      
+    - name: Clone ESRGAN model repository
+      git:
+        repo: https://huggingface.co/nolanaatama/ESRGAN
+        dest: /content/sd-webui/models
+      
+    - name: Clone controlnet model repository
+      git:
+        repo: https://huggingface.co/nolanaatama/models
+        dest: /content/sd-webui/extensions/sd-webui-controlnet
+
+    - name: Descargar modelo deliberate.safetensors
+      get_url:
+        url: "https://civitai.com/api/download/models/15236"
+        dest: "/content/sd-webui/models/Stable-diffusion/deliberate.safetensors"
