@@ -91,7 +91,7 @@
       
     - name: Remove existing sd-webui.zip file
       file:
-        path: /content/sd-webui/sd-webui.zip
+        path: /content/sd-webui.zip
         state: absent
       
     - name: Remove existing sd-webui-images-browser.zip file
