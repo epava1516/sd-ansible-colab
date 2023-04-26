@@ -1,9 +1,6 @@
 ---
 - name: Test database connection
-  ansible.builtin.command: |
-    python -c
-    "drive.mount('{{ item.mount }}');
-    "
+  ansible.builtin.shell: python -c "drive.mount('{{ item.mount }}')"
 
 # - name: Mount gdrive
 #   drive:
