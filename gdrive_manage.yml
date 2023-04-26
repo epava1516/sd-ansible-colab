@@ -3,7 +3,7 @@
   ansible.builtin.command: |
     python -c
     "from google.colab import drive;
-    drive.mount({{ item.mount }});
+    drive.mount('{{ item.mount }}');
     "
 
 # - name: Mount gdrive
