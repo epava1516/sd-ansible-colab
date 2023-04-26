@@ -1,0 +1,17 @@
+---
+- name: Download sd-webui-images-browser.zip
+  ansible.builtin.get_url:
+    url: "{{ item.url }}"
+    dest: "{{ item.path }}"
+
+- name: Unzip sd-webui-images-browser.zip
+  ansible.builtin.unarchive:
+    src: "{{ item.path }}"
+    dest: "{{ item.dest }}"
+    remote_src: true
+  
+- name: Remove existing sd-webui-images-browser.zip file
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: absent
+...
