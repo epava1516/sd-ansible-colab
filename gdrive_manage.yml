@@ -1,7 +1,14 @@
 ---
-- name: Mount gdrive
-  drive:
-    path: "{{ item.mount }}"
+- name: Test database connection
+  ansible.builtin.command: |
+    python -c
+    "from google.colab import drive;
+    drive.mount({{ item.mount }});
+    "
+
+# - name: Mount gdrive
+#   drive:
+#     path: "{{ item.mount }}"
 
 - name: Create base 
   ansible.builtin.file:
