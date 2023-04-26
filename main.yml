@@ -11,13 +11,11 @@
     sd_webui_extensions: "{{ sd_webui }}/extensions"
     sd_webui_embeddings: "{{ sd_webui }}/embeddings"
   tasks:
-    - name: Mount models on Web-UI
+    - name: Create base 
       when: drive_google
-      ansible.builtin.include_tasks:
-        file: gdrive_manage.yml
-      with_items:
-        - mount: "{{ mnt_path }}"
-          base: "{{ mnt_sd_path }}"
+      ansible.builtin.file:
+        path: "{{ mnt_sd_path }}"
+        state: directory
 
     - name: Manage ZIP
       ansible.builtin.include_tasks:

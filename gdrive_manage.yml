@@ -1,6 +1,0 @@
----
-- name: Create base 
-  ansible.builtin.file:
-    path: "{{ item.base }}"
-    state: directory
-...
