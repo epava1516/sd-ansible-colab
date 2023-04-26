@@ -1,11 +1,4 @@
 ---
-- name: Test database connection
-  ansible.builtin.script: mount_drive.py
-
-# - name: Mount gdrive
-#   drive:
-#     path: "{{ item.mount }}"
-
 - name: Create base 
   ansible.builtin.file:
     path: "{{ item.base }}"

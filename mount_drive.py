@@ -1,1 +1,0 @@
-drive.mount('/mnt')

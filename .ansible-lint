@@ -1,0 +1,4 @@
+skip_list:
+  - yaml[trailing-spaces]
+  - latest[git]
+  - risky-file-permissions
