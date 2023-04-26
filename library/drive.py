@@ -19,7 +19,8 @@ def main():
         supports_check_mode=True
     )
 
-    result['message'] = drive.mount(module.params['path'])
+    drive.mount(module.params['path'])
+    result['message'] = "Mounted"
     result['changed'] = True
 
     module.exit_json(**result)
