@@ -35,6 +35,7 @@
     - name: Install deb package
       ansible.builtin.apt:
         deb: "{{ item }}"
+        allow_downgrade: true
       with_items:
       - /tmp/libtcmalloc-minimal4_2.5-2.2ubuntu3_amd64.deb
       - /tmp/libgoogle-perftools-dev_2.5-2.2ubuntu3_amd64.deb
