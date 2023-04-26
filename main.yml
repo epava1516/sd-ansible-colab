@@ -38,8 +38,8 @@
         allow_downgrade: true
       with_items:
       - /tmp/libtcmalloc-minimal4_2.5-2.2ubuntu3_amd64.deb
-      - /tmp/libgoogle-perftools-dev_2.5-2.2ubuntu3_amd64.deb
       - /tmp/libgoogle-perftools4_2.5-2.2ubuntu3_amd64.deb
+      - /tmp/libgoogle-perftools-dev_2.5-2.2ubuntu3_amd64.deb
       - /tmp/google-perftools_2.5-2.2ubuntu3_all.deb
 
     - name: Install fastapi
