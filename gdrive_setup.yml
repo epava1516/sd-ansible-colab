@@ -3,6 +3,7 @@
   ansible.builtin.copy:
     src: "{{ item.copy.src }}/"
     dest: "{{ item.copy.dest }}/"
+    remote_src: true
 
 - name: Mount drive on 
   ansible.posix.mount:
