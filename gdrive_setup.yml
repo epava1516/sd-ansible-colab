@@ -1,15 +1,15 @@
 ---
 - debug:
-    var: item['copy']
+    var: item_copy
 - name: Copy needed dirs
   ansible.builtin.copy:
-    src: "{{ item.copy['src'] }}/"
-    dest: "{{ item.copy['dest'] }}/"
+    src: "{{ item.copy_src }}/"
+    dest: "{{ item.copy_dest }}/"
 
 - name: Mount drive on 
   ansible.posix.mount:
-    src: "{{ item.mount['src'] }}"
-    path: "{{ item.mount['path'] }}"
+    src: "{{ item.mount_src }}"
+    path: "{{ item.mount_path }}"
     opts: bind
     state: mounted
     fstype: none
