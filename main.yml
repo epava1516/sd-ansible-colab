@@ -73,10 +73,8 @@
           mount_path: "{{ sd_webui_models }}"
 
     - name: "Clone {{ item.repo }}"
-      ansible.builtin.git:
-        repo: "{{ item.repo }}"
-        dest: "{{ item.dest }}"
-        bare: true
+      ansible.builtin.include_tasks:
+        file: git_manage.yml
       with_items:
         - repo: "https://github.com/nolanaatama/sd-webui-tunnels"
           dest: "{{ sd_webui_extensions }}/sd-webui-tunnels"

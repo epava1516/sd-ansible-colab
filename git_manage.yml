@@ -1,0 +1,11 @@
+---
+- name: "Clone {{ item.repo }}"
+  ansible.builtin.git:
+    repo: "{{ item.repo }}"
+    dest: "{{ item.dest }}"
+
+- name: "Remove {{ item }}"
+  ansible.builtin.file:
+    path: "{{ item.dest }}/.git"
+    state: absent
+...
