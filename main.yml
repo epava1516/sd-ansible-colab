@@ -100,10 +100,8 @@
         - "{{ sd_webui_extensions }}/sd-webui-controlnet/models"
 
     - name: "Clone {{ item.repo }}"
-      ansible.builtin.git:
-        repo: "{{ item.repo }}"
-        dest: "{{ item.dest }}"
-        bare: true
+      ansible.builtin.include_tasks:
+        file: git_manage.yml
       with_items:
         - repo: "https://huggingface.co/nolanaatama/embeddings"
           dest: "{{ sd_webui_embeddings }}"
