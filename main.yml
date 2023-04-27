@@ -68,8 +68,8 @@
         file: gdrive_setup.yml
       with_items:
         - copy:
-            mount: "{{ mnt_path }}"
-            base: "{{ mnt_sd_path }}"
+            src: "{{ sd_webui_models }}"
+            dest: "{{ mnt_sd_path }}"
           mount:
             src: "{{ mnt_sd_path }}"
             path: "{{ sd_webui_models }}"
