@@ -64,7 +64,8 @@
 
     - name: Mount models on Web-UI
       when: drive_google
-      ansible.builtin.import_tasks: gdrive_setup.yml
+      ansible.builtin.include_tasks:
+        file: gdrive_setup.yml
       with_items:
         - copy:
             src: "{{ sd_webui_models }}"
