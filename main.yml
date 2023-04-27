@@ -67,12 +67,7 @@
       ansible.builtin.include_tasks:
         file: gdrive_setup.yml
       with_items:
-        - copy:
-            src: "{{ sd_webui_models }}"
-            dest: "{{ mnt_sd_path }}"
-          mount:
-            src: "{{ mnt_sd_path }}"
-            path: "{{ sd_webui_models }}"
+        - { copy: { src: "{{ sd_webui_models }}", dest: "{{ mnt_sd_path }}" }, mount: { src: "{{ mnt_sd_path }}", path: "{{ sd_webui_models }}" } }
 
     - name: "Clone {{ item.repo }}"
       ansible.builtin.git:
