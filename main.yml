@@ -76,6 +76,7 @@
       ansible.builtin.git:
         repo: "{{ item.repo }}"
         dest: "{{ item.dest }}"
+        bare: true
       with_items:
         - repo: "https://github.com/nolanaatama/sd-webui-tunnels"
           dest: "{{ sd_webui_extensions }}/sd-webui-tunnels"
@@ -104,6 +105,7 @@
       ansible.builtin.git:
         repo: "{{ item.repo }}"
         dest: "{{ item.dest }}"
+        bare: true
       with_items:
         - repo: "https://huggingface.co/nolanaatama/embeddings"
           dest: "{{ sd_webui_embeddings }}"

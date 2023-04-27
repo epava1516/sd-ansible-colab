@@ -1,6 +1,4 @@
 ---
-- debug:
-    var: item_copy
 - name: Copy needed dirs
   ansible.builtin.copy:
     src: "{{ item.copy_src }}/"
