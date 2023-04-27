@@ -4,7 +4,7 @@
     repo: "{{ item.repo }}"
     dest: "{{ item.dest }}"
 
-- name: "Remove {{ item }}"
+- name: "Remove {{ item.dest }}/.git"
   ansible.builtin.file:
     path: "{{ item.dest }}/.git"
     state: absent
