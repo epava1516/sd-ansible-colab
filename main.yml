@@ -11,12 +11,6 @@
     sd_webui_extensions: "{{ sd_webui }}/extensions"
     sd_webui_embeddings: "{{ sd_webui }}/embeddings"
   tasks:
-    - name: Create base 
-      when: drive_google
-      ansible.builtin.file:
-        path: "{{ mnt_sd_path }}"
-        state: directory
-
     - name: Manage ZIP
       ansible.builtin.include_tasks:
         file: zip_manage.yml
@@ -62,16 +56,6 @@
           dest: "/content/"
           url: "https://huggingface.co/nolanaatama/webui/resolve/main/sd-webui.zip"
 
-    - name: Mount models on Web-UI
-      when: drive_google
-      ansible.builtin.include_tasks:
-        file: gdrive_setup.yml
-      with_items:
-        - copy_src: "{{ sd_webui_models }}"
-          copy_dest: "{{ mnt_sd_path }}"
-          mount_src: "{{ mnt_sd_path }}"
-          mount_path: "{{ sd_webui_models }}"
-
     - name: "Clone {{ item.repo }}"
       ansible.builtin.git:
         repo: "{{ item.repo }}"
@@ -105,7 +89,6 @@
       ansible.builtin.git:
         repo: "{{ item.repo }}"
         dest: "{{ item.dest }}"
-        bare: true
       with_items:
         - repo: "https://huggingface.co/nolanaatama/embeddings"
           dest: "{{ sd_webui_embeddings }}"
