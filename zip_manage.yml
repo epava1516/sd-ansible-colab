@@ -1,16 +1,16 @@
 ---
-- name: "Download {{ item.url }}"
+- name: "Download {{ item.url }} to {{ item.path }}"
   ansible.builtin.get_url:
     url: "{{ item.url }}"
     dest: "{{ item.path }}"
 
-- name: "Unzip {{ item.url }}"
+- name: "Unzip {{ item.dest }}"
   ansible.builtin.unarchive:
     src: "{{ item.path }}"
     dest: "{{ item.dest }}"
     remote_src: true
   
-- name: "Remove existing {{ item.url }} file"
+- name: "Remove existing {{ item.path }} file"
   ansible.builtin.file:
     path: "{{ item.path }}"
     state: absent
