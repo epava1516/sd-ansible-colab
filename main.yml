@@ -7,9 +7,9 @@
     mnt_path: "/mnt"
     mnt_sd_path: "{{ mnt_path }}/MyDrive/Stable-diffusion"
     sd_webui: "/content/sd-webui"
-    sd_webui_models: "{{ sd_webui }}/models"
-    sd_webui_extensions: "{{ sd_webui }}/extensions"
-    sd_webui_embeddings: "{{ sd_webui }}/embeddings"
+    sd_webui_models: "/content/sd-webui/models"
+    sd_webui_extensions: "/content/sd-webui/extensions"
+    sd_webui_embeddings: "/content/sd-webui/embeddings"
   tasks:
     - name: Manage ZIP
       ansible.builtin.include_tasks:
