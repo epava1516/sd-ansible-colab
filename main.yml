@@ -16,7 +16,7 @@
         file: zip_manage.yml
       with_items:
         - path: "/tmp/memfix.zip"
-          dest: "/content/"
+          dest: "/tmp/"
           url: "https://github.com/nolanaatama/sd-webui/raw/main/memfix.zip"
 
     - name: Install libunwind8-dev
@@ -29,10 +29,10 @@
         deb: "{{ item }}"
         allow_downgrade: true
       with_items:
-        - /content/libtcmalloc-minimal4_2.5-2.2ubuntu3_amd64.deb
-        - /content/libgoogle-perftools4_2.5-2.2ubuntu3_amd64.deb
-        - /content/libgoogle-perftools-dev_2.5-2.2ubuntu3_amd64.deb
-        - /content/google-perftools_2.5-2.2ubuntu3_all.deb
+        - /tmp/libtcmalloc-minimal4_2.5-2.2ubuntu3_amd64.deb
+        - /tmp/libgoogle-perftools4_2.5-2.2ubuntu3_amd64.deb
+        - /tmp/libgoogle-perftools-dev_2.5-2.2ubuntu3_amd64.deb
+        - /tmp/google-perftools_2.5-2.2ubuntu3_all.deb
 
     - name: Install fastapi
       ansible.builtin.pip:
