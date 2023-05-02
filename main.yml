@@ -60,18 +60,18 @@
         bare: true
       with_items:
         - repo: "https://github.com/nolanaatama/sd-webui-tunnels"
-          dest: "{{ sd_webui_extensions }}/sd-webui-tunnels"
+          dest: "/content/sd-webui/extensions/sd-webui-tunnels"
         - repo: "https://github.com/Mikubill/sd-webui-controlnet"
-          dest: "{{ sd_webui_extensions }}/sd-webui-controlnet"
+          dest: "/content/sd-webui/extensions/sd-webui-controlnet"
         - repo: "https://github.com/hnmr293/posex"
-          dest: "{{ sd_webui_extensions }}/posex"
+          dest: "/content/sd-webui/extensions/posex"
 
     - name: Manage ZIP
       ansible.builtin.include_tasks:
         file: zip_manage.yml
       with_items:
         - path: "/tmp/sd-webui-images-browser.zip"
-          dest: "{{ sd_webui_extensions }}"
+          dest: "/content/sd-webui/extensions"
           url: "https://huggingface.co/nolanaatama/webui/resolve/main/sd-webui-images-browser.zip"
 
     - name: "Remove {{ item }}"
@@ -79,8 +79,8 @@
         path: "{{ item }}"
         state: absent
       with_items:
-        - "{{ sd_webui_embeddings }}"
-        - "{{ sd_webui_extensions }}/sd-webui-controlnet/models"
+        - "/content/sd-webui/embeddings"
+        - "/content/sd-webui/extensions/sd-webui-controlnet/models"
 
     - name: "Clone {{ item.repo }}"
       ansible.builtin.git:
@@ -88,8 +88,8 @@
         dest: "{{ item.dest }}"
       with_items:
         - repo: "https://huggingface.co/nolanaatama/embeddings"
-          dest: "{{ sd_webui_embeddings }}"
+          dest: "/content/sd-webui/embeddings"
         - repo: "https://huggingface.co/nolanaatama/ESRGAN"
-          dest: "{{ sd_webui_models }}/ESRGAN"
+          dest: "/content/sd-webui/models/ESRGAN"
         - repo: "https://huggingface.co/nolanaatama/models"
-          dest: "{{ sd_webui_extensions }}/sd-webui-controlnet/models"
+          dest: "/content/sd-webui/extensions/sd-webui-controlnet/models"
