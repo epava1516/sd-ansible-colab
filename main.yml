@@ -53,11 +53,10 @@
           dest: "/content/"
           url: "https://huggingface.co/nolanaatama/webui/resolve/main/sd-webui.zip"
 
-    - name: "Clone {{ item.repo }}"
+    - name: "Clone repo"
       ansible.builtin.git:
         repo: "{{ item.repo }}"
         dest: "{{ item.dest }}"
-        bare: true
       with_items:
         - repo: "https://github.com/nolanaatama/sd-webui-tunnels"
           dest: "/content/sd-webui/extensions/sd-webui-tunnels"
@@ -74,7 +73,7 @@
           dest: "/content/sd-webui/extensions"
           url: "https://huggingface.co/nolanaatama/webui/resolve/main/sd-webui-images-browser.zip"
 
-    - name: "Remove {{ item }}"
+    - name: "Remove item"
       ansible.builtin.file:
         path: "{{ item }}"
         state: absent
@@ -82,7 +81,7 @@
         - "/content/sd-webui/embeddings"
         - "/content/sd-webui/extensions/sd-webui-controlnet/models"
 
-    - name: "Clone {{ item.repo }}"
+    - name: "Clone repo"
       ansible.builtin.git:
         repo: "{{ item.repo }}"
         dest: "{{ item.dest }}"
