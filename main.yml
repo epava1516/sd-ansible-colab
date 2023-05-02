@@ -13,12 +13,6 @@
     sd_webui_extensions: "{{ sd_webui }}/extensions"
     sd_webui_embeddings: "{{ sd_webui }}/embeddings"
   tasks:
-    - name: Create base
-      when: drive_google
-      ansible.builtin.file:
-        path: "{{ mnt_sd_path }}"
-        state: directory
-
     - name: Download memfix.zip
       get_url:
         url: https://github.com/nolanaatama/sd-webui/raw/main/memfix.zip
@@ -63,21 +57,6 @@
         src: /content/sd-webui.zip
         dest: /content
         remote_src: yes
-        
-    - name: Copy needed dirs
-      when: drive_google
-      ansible.builtin.copy:
-        src: "{{ sd_webui_models }}/"
-        dest: "{{ mnt_sd_path }}/"
-
-    - name: Mount drive on 
-      when: drive_google
-      ansible.posix.mount:
-        src: "{{ mnt_sd_path }}"
-        path: "{{ sd_webui_models }}"
-        opts: bind
-        state: mounted
-        fstype: none
 
     - name: Clone sd-webui-tunnels
       git:
