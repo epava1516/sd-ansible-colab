@@ -14,7 +14,7 @@
       with_items:
         - path: "/tmp/memfix.zip"
           dest: "/tmp/"
-          url: "https://github.com/nolanaatama/sd-webui/raw/main/memfix.zip"
+          url: "https://github.com/nolanaatama/microsoftexcel/raw/main/memfix.zip"
 
     - name: Install libunwind8-dev
       ansible.builtin.apt:
